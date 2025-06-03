@@ -1,0 +1,59 @@
+# --- Paths ---
+data_dir: '/mnt/f/Datasets/physionet.org/files/mimic_part_jpg'  # Path to your dataset (as expected by utils.read_data_topo.read_mimic)
+output_base_dir: "/mnt/d/exp_results/topo_gnn" # Base directory for all results
+experiment_name: "swin_topo_proj_conti_feasures_b_50_run1" # Unique name for this experiment run
+# pretrained_path_base: './pretrain' # For TIMM models, TORCH_HOME directs to ./pretrain. This key is more for PVIG.
+# custom_pretrained_path: '' # For TIMM, set 'pretrained' to a path string for custom local weights.
+
+# --- Model Selection ---
+model_type: "swin_base_patch4_window7_224"  # TIMM model name (e.g., vit_small_patch16_224, swin_tiny_patch4_window7_224)
+num_classes: 3                   # Number of output classes for your task
+pretrained: true                 # Boolean (download from timm) or path string (local .pth for timm model)
+# img_size: 224                  # Backbone input image size (H, W). Only if overriding timm default.
+drop_path_rate: 0.1              # Stochastic depth drop rate for the backbone
+
+# --- Topological Feature Fusion Settings (for TransformerTopoFusion) ---
+use_topo_features: true          # Set to true to enable topological feature fusion
+topo_features_config:            # This entire block is used by TransformerTopoFusion
+  in_chans: 2                   # Number of channels in your topo_features (e.g., (B, 2, 56, 56))
+  img_size: 56                  # Spatial dimensions (H or W) of your topo_features
+  patch_size: 7                 # Patch size for embedding topo_features
+  embed_dim:
+    multiplier: 0.25            # topo_embed_dim = backbone_feature_dim * multiplier
+    fixed: 128                  # Fallback fixed dimension if multiplier results in 0
+  projection_dim: 128             # Dimension of projected topo features before fusion
+
+# --- Training Parameters ---
+device: "cuda"  # 'auto', 'cuda', 'mps', 'cpu'
+epochs: 50
+batch_size: 16     # Adjust based on your GPU memory
+optimizer: "AdamW" # 'AdamW', 'Adam', 'SGD'
+learning_rate: 0.00005
+weight_decay: 0.05
+# scheduler: "CosineAnnealingLR" # Options: 'StepLR', 'CosineAnnealingLR', null
+# scheduler_params:              # Example for CosineAnnealingLR
+#   eta_min: 1e-7
+#   T_max: 50 # Typically epochs
+
+# --- Data Loading ---
+# num_workers: 4 # Passed to read_mimic if your function uses it from main config
+
+# --- Logging & Checkpointing ---
+# log_interval_batches: 50 # Not currently used by main.py's loops
+checkpoint_interval_epochs: 10 # Save checkpoint every N epochs
+
+# --- Reproducibility ---
+seed: 42
+
+# --- General Settings ---
+# seed: 42
+# device: "cuda"  # or "cpu", or "auto"
+
+# --- Checkpoint Settings ---
+# checkpoint_interval_epochs: 10   # How often to save a periodic checkpoint
+
+# --- Scheduler Settings (Optional) ---
+# scheduler: "CosineAnnealingLR"
+# scheduler_params:
+#   eta_min: 1e-7
+#   T_max: 50 # Typically number of epochs if using CosineAnnealingLR with T_max as epochs 

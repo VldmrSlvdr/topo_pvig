@@ -1,0 +1,31 @@
+# DenseNet121 Training Configuration
+
+# Experiment settings
+experiment_name: 'densenet121_topo_proj'
+output_base_dir: 'results'
+seed: 42
+
+# Data settings  
+data_dir: '/mnt/f/Datasets/physionet.org/files/mimic_part_jpg'
+batch_size: 16
+num_classes: 3
+
+# Model settings
+model_type: 'densenet121'
+model_mode: 'proj'  # Use projection mode
+pretrained: true
+use_custom_pretrained: false
+custom_pretrained_path: null
+drop_path_rate: 0.1
+
+# Training settings
+epochs: 100
+learning_rate: 1e-4
+weight_decay: 1e-4
+optimizer: 'AdamW'  # AdamW, Adam, or SGD
+
+# Device settings
+device: 'auto'  # auto, cuda, mps, or cpu
+
+# Checkpoint settings
+checkpoint_interval_epochs: 10 

@@ -1,0 +1,42 @@
+# Swin Transformer Training Configuration
+
+# Path settings
+data_dir: "/mnt/f/Datasets/physionet.org/files/mimic_part_jpg"               # Directory containing the dataset
+output_base_dir: "/mnt/d/exp_results/topo_gnn"        # Directory to save all run outputs
+experiment_name: "swin_topo_proj_conti_feasures_b_50_run1" # Used for naming output directories
+
+# Model settings
+model_type: "swin_base_proj"    # Options: swin_tiny_proj, swin_small_proj, swin_base_proj
+num_classes: 3                    # Number of output classes
+pretrained: true                  # Whether to use pretrained weights
+drop_path_rate: 0.2               # Drop path rate for stochastic depth
+
+# Topological Feature Settings
+use_topo_features: true           # Enable topological feature integration
+topo_features_config:
+  in_chans: 2                     # Number of topological feature channels
+  img_size: 56                    # Size of topological feature maps
+  patch_size: 7                   # Patch size for topo feature embedding
+  embed_dim:
+    multiplier: 0.25              # Relative to backbone feature dimension
+    fixed: 128                    # Fallback if multiplier results in 0
+
+# Training settings
+device: "cuda"                    # Device to use for training (cuda or cpu)
+epochs: 50                       # Number of epochs to train for  
+batch_size: 16                    # Batch size for training (smaller for Swin due to memory)
+optimizer: "AdamW"                # Optimizer to use (AdamW or Adam)
+learning_rate: 0.0001             # Learning rate for optimizer
+weight_decay: 0.05                # Weight decay for optimizer
+checkpoint_interval_epochs: 10    # Save checkpoint every N epochs
+
+# Data loading
+num_workers: 4                    # Number of worker threads for data loading
+
+# Scheduler settings (optional)
+# scheduler: "CosineAnnealingLR"    # Options: StepLR, CosineAnnealingLR, or null
+# scheduler_params:
+#   eta_min: 1e-6                  # Minimum learning rate for cosine annealing
+
+# Reproducibility
+seed: 42                          # Random seed for reproducibility 

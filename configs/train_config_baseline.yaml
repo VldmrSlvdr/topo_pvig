@@ -1,0 +1,38 @@
+# Training Configuration
+
+# --- Paths ---
+data_dir: '/mnt/f/Datasets/physionet.org/files/mimic_part_jpg'
+output_base_dir: '/mnt/d/exp_results/topo_gnn' # Base directory for all results
+experiment_name: 'pvig_baseline_b_1000_non-pre_run1' # Unique name for this experiment run
+pretrained_path_base: './pretrain' # Directory where pvig_ti_*.pth.tar etc. are stored
+
+# --- Model Selection ---
+# model_type: 'pvig_ti' # Options: 'pvig_ti', 'pvig_s', 'pvig_m', 'pvig_b'
+model_type: 'pvig_b'
+# model_mode: 'dim0' # Options: 'dim0', 'dim1', 'proj'
+model_mode: 'baseline'
+num_classes: 3 # CHF, Normal, Pneumonia
+pretrained: false # Load ImageNet pretrained weights (if available for the type)
+
+# --- Training Parameters ---
+device: 'auto' # 'auto', 'cuda', 'mps', 'cpu'
+epochs: 1000
+batch_size: 32
+optimizer: 'AdamW'
+learning_rate: 1.0e-4
+weight_decay: 0.0 # AdamW handles decay differently, often set to 0 here
+# scheduler: null # Options: 'StepLR', 'CosineAnnealingLR', null
+# scheduler_params: # Example for StepLR
+#   step_size: 30
+#   gamma: 0.5
+
+# --- Data Loading ---
+num_workers: 4
+
+# --- Logging & Checkpointing ---
+log_interval_batches: 50 # Print progress every N batches (not implemented in this version, uses tqdm)
+checkpoint_interval_epochs: 100 # Save checkpoint every N epochs
+drop_path_rate: 0.0 # Stochastic depth drop rate
+
+# --- Reproducibility ---
+seed: 42 

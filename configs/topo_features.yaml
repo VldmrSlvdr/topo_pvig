@@ -1,0 +1,32 @@
+# =============================================================
+# Topological Feature Generation Configuration
+# =============================================================
+
+# ----------------------
+# Input/Output Settings
+# ----------------------
+input_dir: "/mnt/f/Datasets/physionet.org/files/mimic_part_jpg"  # Directory containing input images
+output_dir: "/mnt/f/Datasets/physionet.org/files/mimic_part_jpg" # Base directory for output files
+file_pattern: "*.jpg"                # Pattern for image files to process
+recursive: true                      # Search subdirectories recursively
+force_reprocess: true               # If false, skip files that already have outputs
+
+# ----------------------
+# Persistence Diagram
+# ----------------------
+# Filtration type: 'superlevel' highlights bright features, 'sublevel' highlights dark features
+filtration: "superlevel"              
+
+# ----------------------
+# Topological Features
+# ----------------------
+topo_features:
+  lifetime_threshold: -0.5           # Threshold for significant topological features
+                                     # More negative = more features
+  
+# ----------------------
+# Processing Options
+# ----------------------
+parallel: false                      # Enable parallel processing
+num_workers: 4                       # Number of worker processes
+verbose: true                        # Show detailed progress information 

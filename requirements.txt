@@ -1,0 +1,37 @@
+# Core
+numpy==1.23.5
+pandas==1.5.0
+scikit-learn==1.2.0
+tqdm==4.64.1
+scipy==1.9.1
+
+# Deep Learning
+torch==2.0.0
+torchvision==0.15.1
+
+# Medical Imaging
+pydicom==2.3.1
+SimpleITK==2.2.1
+
+# Configuration
+ruamel.yaml==0.17.21
+pyyaml==6.0
+
+# Visualization
+matplotlib==3.6.2
+seaborn==0.12.2
+
+# Gaze Analysis
+opencv-python==4.7.0.68
+
+# Topological Data Analysis
+gudhi==3.7.1
+scikit-tda==1.0.0
+ripser==0.6.4
+persim==0.3.3
+Pillow==9.3.0
+homecloud
+
+# Hyperparameter Optimization
+optuna==3.3.0
+plotly==5.18.0

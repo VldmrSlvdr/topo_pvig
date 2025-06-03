@@ -1,0 +1,56 @@
+# =============================================================
+# Topological Importance Analysis Configuration
+# =============================================================
+
+# ----------------------
+# Input/Output Settings
+# ----------------------
+input_dir: "/mnt/f/Datasets/physionet.org/files/mimic_part_jpg/test"               # Directory containing input images
+output_dir: "/mnt/f/Datasets/physionet.org/files/mimic_part_jpg/topo_heatmap"             # Base directory for all output files
+file_pattern: "*.jpg,*.png,*.dcm"     # Pattern for image files to process
+recursive: true                       # Search subdirectories recursively
+force_reprocess: false                # If false, skip files that already have outputs
+
+# ----------------------
+# Image Standardization
+# ----------------------
+preprocessing:
+  # Dimension settings
+  target_width: 512                   # Target width for standardized images
+  target_height: 512                  # Target height for standardized images
+  preserve_aspect_ratio: false        # Whether to preserve aspect ratio when resizing
+  
+  # Enhancement settings
+  invert: true                        # Invert intensity (for dark-on-bright images like X-rays)
+  clahe_clip_limit: 0.03              # Contrast Limited Adaptive Histogram Equalization parameter
+  structure_sigma: 1                  # Gaussian sigma for structure enhancement
+  structure_weight: 0.3               # Weight of structure enhancement in final image
+
+# ----------------------
+# Persistence Diagram
+# ----------------------
+# Filtration type: 'superlevel' highlights bright features, 'sublevel' highlights dark features
+filtration: "superlevel"              
+
+# ----------------------
+# Topological Features
+# ----------------------
+topo_importance:
+  # Feature extraction
+  lifetime_threshold: -0.5            # Threshold for significant topological features
+                                      # More negative = more features
+  sigma: 15                           # Gaussian sigma for smoothing heatmaps
+                                      # Larger values create more diffuse heatmaps
+  
+  # Visualization
+  alpha: 0.7                          # Transparency for importance overlay
+  colormap_dim0: "hot"                # Colormap for dimension 0 features (connected components)
+  colormap_dim1: "cool"               # Colormap for dimension 1 features (loops/holes)
+
+# ----------------------
+# Processing Options
+# ----------------------
+parallel: true                        # Use parallel processing
+num_workers: 4                        # Number of worker processes
+batch_size: 16                        # Batch size for parallel processing
+verbose: true                         # Show detailed progress information 

@@ -1,0 +1,45 @@
+# Configuration for training TopoGNN models
+
+# Path settings
+data_dir: "./data"               # Directory containing the dataset
+output_base_dir: "./runs"        # Directory to save all run outputs
+experiment_name: "topoGNN_run"   # Used for naming output directories
+pretrained_path_base: "./pretrain"  # Base directory for pretrained models
+
+# Model settings
+# model_type: One of ['pvig_ti', 'pvig_s', 'pvig_m', 'pvig_b']
+#   - pvig_ti: Tiny model (48-96-240-384 channels)
+#   - pvig_s: Small model (80-160-400-640 channels)
+#   - pvig_m: Medium model (96-192-384-768 channels) 
+#   - pvig_b: Base/large model (128-256-512-1024 channels)
+model_type: "pvig_ti"
+
+# model_mode: One of ['baseline', 'dim0', 'dim1', 'proj', 'gated']
+#   - baseline: Original ViG model without topo features
+#   - dim0: Use only Dimension 0 topo features
+#   - dim1: Use only Dimension 1 topo features
+#   - proj: Project both dimensions together
+#   - gated: Use gated combination of both dimensions
+model_mode: "gated"
+
+num_classes: 3                    # Number of output classes
+pretrained: true                  # Whether to use pretrained weights
+
+# Training settings
+device: "cuda"                    # Device to use for training (cuda or cpu)
+epochs: 100                       # Number of epochs to train for  
+batch_size: 32                    # Batch size for training
+optimizer: "AdamW"                # Optimizer to use (AdamW or SGD)
+learning_rate: 0.0001             # Learning rate for optimizer
+weight_decay: 0.05                # Weight decay for optimizer
+checkpoint_interval_epochs: 10    # Save checkpoint every N epochs
+
+# Data loading
+num_workers: 4                    # Number of worker threads for data loading
+
+# Logging and regularization
+log_interval_batches: 10          # Log training metrics every N batches
+drop_path_rate: 0.2               # Drop path rate for stochastic depth
+
+# Reproducibility
+seed: 42                          # Random seed for reproducibility 

@@ -1,0 +1,16 @@
+# ignore all pycache
+__pycache__/
+
+# ignore all temp files
+temp/
+
+# ignore all results
+results/
+
+/output
+/logs
+/data
+/debug
+/pretrain
+/refered
+/DataProcessing

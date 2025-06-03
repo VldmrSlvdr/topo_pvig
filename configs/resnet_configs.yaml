@@ -1,0 +1,94 @@
+# ResNet Training Configurations
+
+# ResNet18 Configuration
+resnet18:
+  experiment_name: 'resnet18_topo_proj'
+  output_base_dir: 'results'
+  seed: 42
+  
+  # Data settings  
+  data_dir: '/mnt/f/Datasets/physionet.org/files/mimic_part_jpg'
+  batch_size: 32
+  num_classes: 3
+  
+  # Model settings
+  model_type: 'resnet18'
+  model_mode: 'proj'
+  pretrained: true
+  use_custom_pretrained: false
+  custom_pretrained_path: null
+  drop_path_rate: 0.05
+  
+  # Training settings
+  epochs: 100
+  learning_rate: 1e-3
+  weight_decay: 1e-4
+  optimizer: 'AdamW'
+  
+  # Device settings
+  device: 'auto'
+  
+  # Checkpoint settings
+  checkpoint_interval_epochs: 10
+
+# ResNet50 Configuration  
+resnet50:
+  experiment_name: 'resnet50_topo_proj'
+  output_base_dir: 'results'
+  seed: 42
+  
+  # Data settings  
+  data_dir: '/mnt/f/Datasets/physionet.org/files/mimic_part_jpg'
+  batch_size: 16
+  num_classes: 3
+  
+  # Model settings
+  model_type: 'resnet50'
+  model_mode: 'proj'
+  pretrained: true
+  use_custom_pretrained: false
+  custom_pretrained_path: null
+  drop_path_rate: 0.1
+  
+  # Training settings
+  epochs: 100
+  learning_rate: 5e-4
+  weight_decay: 1e-4
+  optimizer: 'AdamW'
+  
+  # Device settings
+  device: 'auto'
+  
+  # Checkpoint settings
+  checkpoint_interval_epochs: 10
+
+# ResNet101 Configuration
+resnet101:
+  experiment_name: 'resnet101_topo_proj'
+  output_base_dir: 'results'
+  seed: 42
+  
+  # Data settings  
+  data_dir: '/mnt/f/Datasets/physionet.org/files/mimic_part_jpg'
+  batch_size: 8
+  num_classes: 3
+  
+  # Model settings
+  model_type: 'resnet101'
+  model_mode: 'proj'
+  pretrained: true
+  use_custom_pretrained: false
+  custom_pretrained_path: null
+  drop_path_rate: 0.1
+  
+  # Training settings
+  epochs: 100
+  learning_rate: 3e-4
+  weight_decay: 1e-4
+  optimizer: 'AdamW'
+  
+  # Device settings
+  device: 'auto'
+  
+  # Checkpoint settings
+  checkpoint_interval_epochs: 10 
